@@ -1,0 +1,8 @@
+$main: red;
+body {
+    background: $main;
+
+    h2 {
+        color: blue;   
+    }
+}
