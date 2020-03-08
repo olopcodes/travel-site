@@ -1,8 +1,6 @@
-$main: red;
-body {
-    background: $main;
+@import 'normalize.css';
+@import 'base/_global';
+@import 'base/_variables';
+@import 'modules/_btn';
+@import 'modules/_large-hero';
 
-    h2 {
-        color: blue;   
-    }
-}
