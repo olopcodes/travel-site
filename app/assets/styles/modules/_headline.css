@@ -40,4 +40,8 @@
     &--mb-lrg {
         margin-bottom: 1.6em;
     }
+
+    &--mt-0 {
+        margin-top: 0;
+    }
 }
