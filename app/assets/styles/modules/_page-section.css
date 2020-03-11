@@ -11,5 +11,6 @@
     &--blue {
         background-color: $mainBlue;
         color: white;
+        max-width: 100%;
     }
 }
