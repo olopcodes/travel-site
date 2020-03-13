@@ -16,6 +16,14 @@
         }
     }
 
+    &--p0 {
+      padding: 0;
+      
+      @mixin atLarge {
+        padding: 0 18px;  
+      }
+    }
+
     .wrapper{
         padding: 0;
     }

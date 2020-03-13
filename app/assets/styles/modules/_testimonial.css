@@ -1,6 +1,16 @@
 .testimonial {
     background-color: rgba(255,255,255,.8);
-    padding: 0 1.8125rem 1px;
+    padding: 0 18px 1px;
+    margin-bottom: 98px;
+
+    &--last {
+        margin-bottom: 0;
+    }
+
+    @mixin atLarge {
+        padding: 0 1.8125rem 1px;
+        margin-bottom: 0;
+    }
 
     &__img {
         height: 160px;
@@ -13,7 +23,7 @@
         border: 6px solid rgba(255,255,255,.8);
     }
 
-    &--title {
+    &__title {
         color: $mainBlue;
         text-align: center;
         font-size: 1.5rem;
@@ -21,7 +31,7 @@
         margin: 0;
     }
 
-    &--subtitle {
+    &__subtitle {
         color: $mainOrange;
         text-align: center;
         font-size: .9375rem;
