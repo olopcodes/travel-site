@@ -1,0 +1,28 @@
+.main-nav{
+    &--move-right {
+        float: right;
+    }
+
+    ul {
+        @mixin clearfix;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+        float: left;
+        padding-right: 1.25rem;
+    }
+
+    a {
+        color: white;
+        text-decoration: underline;
+        font-weight: 300;
+        display: inline-block;
+        padding: 17px 0;
+        text-decoration: none;
+    }
+
+   
+}
