@@ -1,6 +1,13 @@
 .main-nav{
+    padding-top: 10px;
+    @mixin atMedium {
+        padding-top: 0;
+    }
     &--move-right {
-        float: right;
+
+        @mixin atMedium {
+            float: right;            
+        }
     }
 
     ul {
@@ -11,8 +18,22 @@
 
     li {
         list-style: none;
-        float: left;
-        padding-right: 1.25rem;
+        padding-right: 7px;
+        display: inline-block;
+
+        @mixin atMedium {
+            padding-right: 1.25rem;
+            float: left;            
+            display: block;
+        }
+    }
+
+    li:last-child {
+        padding-right: 0;
+
+        @mixin atMedium {
+            padding-right: 1.25rem;
+        }
     }
 
     a {
@@ -20,8 +41,19 @@
         text-decoration: underline;
         font-weight: 300;
         display: inline-block;
-        padding: 17px 0;
         text-decoration: none;
+        padding: 5px 8px;
+        font-size: .8rem;
+        background-color: rgba($mainBlue, .6);
+        @mixin atMedium {
+            background-color: transparent;
+            font-size: 1rem;
+            padding: 17px 0;            
+        }
+
+        &:hover {
+            font-weight: 500;
+        }
     }
 
    
