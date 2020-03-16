@@ -48,7 +48,11 @@
         @mixin atMedium {
             background-color: transparent;
             font-size: 1rem;
-            padding: 17px 0;            
+            padding: 17px 0;  
+            
+            &.current-link {
+                color: #fabb69;
+            }
         }
 
         &:hover {
