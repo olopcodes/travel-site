@@ -2,20 +2,17 @@ class Modal {
     constructor() {
         this.injectHtml();
         this.modal = document.querySelector('.modal');
-        this.openModalBtns = document.querySelectorAll('.open-modal')
         this.modalClose = document.querySelector('.modal__close')
         this.events();
     }
 
 
     events() {
-        this.openModalBtns.forEach(btn => btn.addEventListener('click', e => this.openModal(e)))
         this.modalClose.addEventListener('click', () => this.closeModal())
         document.addEventListener('keyup', e => this.keypressRemove(e));
     }
 
-    openModal(e) {
-        e.preventDefault();
+    openModal() {
         this.modal.classList.add('modal--visible');
     }
 
