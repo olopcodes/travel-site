@@ -16,7 +16,7 @@ document.querySelectorAll('.open-modal').forEach(btn => {
     btn.addEventListener('click', e => {
         e.preventDefault();
         if(typeof modal == 'undefined') {
-            import ('./modules/Modal')
+            import (/* webpackChunkName: "modal" */'./modules/Modal')
             .then(x => {
                 modal = new x.default()
                 setTimeout(()=> modal.openModal(), 20)
@@ -27,6 +27,8 @@ document.querySelectorAll('.open-modal').forEach(btn => {
         }
     })
 })
+
+alert('hey')
 
 
 
