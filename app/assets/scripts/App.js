@@ -28,8 +28,6 @@ document.querySelectorAll('.open-modal').forEach(btn => {
     })
 })
 
-alert('hey')
-
 
 
 if(module.hot) {

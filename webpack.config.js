@@ -2,6 +2,8 @@ const currentTask = process.env.npm_lifecycle_event
 const path = require('path');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MinifyCss = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const fse = require('fs-extra');
 
 const postCssPlugins = [
     require('postcss-import'),
@@ -11,6 +13,14 @@ const postCssPlugins = [
     require('postcss-hexrgba'),
     require('autoprefixer')
 ];
+
+class RunAfterCompile {
+    apply(compiler) {
+        compiler.hooks.done.tap('Copy Images', function(){
+            fse.copySync('./app/assets/images', './docs/assets/images')
+        })
+    }
+}
 
 let cssConfig = {
     // webpack look for css files
@@ -24,9 +34,21 @@ let cssConfig = {
     }]
 }
 
+
+// for multiple html files
+let pages = fse.readdirSync('./app').filter(function(file) {
+    return file.endsWith('.html')
+  }).map(function(page) {
+    return new HtmlWebpackPlugin({
+      filename: page,
+      template: `./app/${page}`
+    })
+  })
+
 let config = {
     // where webpack looks initially
     entry: './app/assets/scripts/App.js',
+    plugins: pages,
     module: {
         rules: [
             cssConfig
@@ -65,6 +87,17 @@ if(currentTask == 'dev') {
 
 // when you run npm build to publish a site this will happen
 if(currentTask == 'build') {
+    config.module.rules.push({
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      })
+
     cssConfig.use.unshift(MinifyCss.loader);
     postCssPlugins.push(require('cssnano'));
     config.output = {
@@ -72,7 +105,7 @@ if(currentTask == 'build') {
         filename: '[name].[chunkhash].js',
         chunkFilename: '[name].[chunkhash].js',
         // so that the file sits next to the index file
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'docs')
     };
 
     config.mode = 'production';
@@ -81,12 +114,13 @@ if(currentTask == 'build') {
         splitChunks: {chunks: 'all'}
     };
 
-    config.plugins = [
+    config.plugins.push(
         new CleanWebpackPlugin(),
         new MinifyCss({
             filename: 'styles.[chunkhash].css'
-        })
-    ];
+            }),
+        new RunAfterCompile()         
+        );
 }
 
 
