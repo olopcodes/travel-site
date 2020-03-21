@@ -16,11 +16,11 @@ const postCssPlugins = [
 
 class RunAfterCompile {
     apply(compiler) {
-        compiler.hooks.done.tap('Copy Images', function(){
-            fse.copySync('./app/assets/images', './docs/assets/images')
-        })
+      compiler.hooks.done.tap('Copy images', function() {
+        fse.copySync('./app/assets/images', './docs/assets/images')
+      })
     }
-}
+  }
 
 let cssConfig = {
     // webpack look for css files
