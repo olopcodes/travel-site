@@ -1,41 +1,33 @@
-import Axios from 'axios';
+import Axios from 'axios'
 
 class ClientArea {
   constructor() {
     this.injectHTML()
-    this.form = document.querySelector('client-area__form');
-    this.field = document.querySelector('client-area__input');
-    this.contentArea =document.querySelector('client-area__content-area');
-    this.events();
+    this.form = document.querySelector(".client-area__form")
+    this.field = document.querySelector(".client-area__input")
+    this.contentArea = document.querySelector(".client-area__content-area")
+    this.events()
   }
 
   events() {
-    this.form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        this.sendRequest();
+    this.form.addEventListener("submit", e => {
+      e.preventDefault()
+      this.sendRequest()
     })
   }
 
   sendRequest() {
-      // post request
-      // entering user input in the object for the request
-      const url = 'https://fervent-bohr-4a3e92.netlify.com/.netlify/functions/secret-area';
-      Axios.post(url, {password: this.field.value}).then((response)=> {
-          this.form.remove();
-          this.contentArea.innerHTML = response.data;
-      }).catch(()=> {
-        this.contentArea.innerHTML(`
-          <p class="client-area__error">
-            That phrase is incorrect. Try again!
-          </p>
-        `)
-
-        this.field.value = '';
-        this.field.focus();
-      })
+    // enter the url
+    // enter what to check in the object
+    Axios.post('https://pensive-rosalind-383c21.netlify.com/.netlify/functions/secret-area', {password: this.field.value}).then(response => {
+      this.form.remove()
+      this.contentArea.innerHTML = response.data
+    }).catch(() => {
+      this.contentArea.innerHTML = `<p class="client-area__error">That secret phrase is not correct. Try again.</p>`
+      this.field.value = ''
+      this.field.focus()
+    })
   }
-
-  
 
   injectHTML() {
     document.body.insertAdjacentHTML('beforeend', `
