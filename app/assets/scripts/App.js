@@ -5,6 +5,15 @@ import RevealOnScroll from './modules/RevealOnScroll';
 import StickyHeader from './modules/StickyHeader';
 import ClientArea from './modules/ClientArea';
 
+// React related code
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+// import created react components
+import MyAmazingComponent from './modules/MyAmazingComponent'
+
+ReactDOM.render(<MyAmazingComponent />, document.querySelector('#react-example'))
+
 
 new ClientArea();
 new StickyHeader();
